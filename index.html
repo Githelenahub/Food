@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Philosophy - Energize & Enjoy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #22c55e, #16a34a, #15803d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        .philosophy-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .principles {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .principles h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .principle-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .principle-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            border-left: 4px solid #22c55e;
+            transition: all 0.3s ease;
+        }
+
+        .principle-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .principle-number {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .principle-text {
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin: 4rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 150px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #22c55e;
+            display: block;
+        }
+
+        .stat-label {
+            color: #cbd5e1;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            border-radius: 0 100% 0 100%;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        .floating-leaf:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-leaf:nth-child(2) { top: 60%; left: 80%; animation-delay: 2s; }
+        .floating-leaf:nth-child(3) { top: 80%; left: 20%; animation-delay: 4s; }
+        .floating-leaf:nth-child(4) { top: 40%; left: 70%; animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(-30px) rotate(3deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .hero { padding: 2rem 0; }
+            .philosophy-cards { grid-template-columns: 1fr; }
+            .stats { flex-direction: column; gap: 1rem; }
+            .principle-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-leaf"></div>
+        <div class="floating-leaf"></div>
+        <div class="floating-leaf"></div>
+        <div class="floating-leaf"></div>
+    </div>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Food Philosophy</h1>
+            <p>Nourish your body with purpose. Every meal should energize your spirit and delight your senses while fueling optimal health.</p>
+        </section>
+
+        <section class="philosophy-cards">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Energize Your Body</h3>
+                <p>Food is fuel for life. Every bite should contribute to sustained energy, mental clarity, and physical vitality throughout your day.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">😋</div>
+                <h3>Taste & Enjoyment</h3>
+                <p>Healthy eating doesn't mean sacrificing flavor. The perfect meal combines nutritional excellence with genuine culinary pleasure.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🥬</div>
+                <h3>Dark Leafy Greens</h3>
+                <p>Nature's powerhouses packed with vitamins, minerals, and antioxidants. The foundation of vibrant health starts with deep green nutrition.</p>
+            </div>
+        </section>
+
+        <section class="principles">
+            <h2>Core Principles</h2>
+            <div class="principle-list">
+                <div class="principle-item">
+                    <div class="principle-number">1</div>
+                    <div class="principle-text">Prioritize high-quality protein to maintain muscle mass and satiety</div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-number">2</div>
+                    <div class="principle-text">Keep carbohydrates low to optimize energy and metabolic health</div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-number">3</div>
+                    <div class="principle-text">Include dark leafy greens in most meals for essential micronutrients</div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-number">4</div>
+                    <div class="principle-text">Every meal should bring genuine enjoyment and satisfaction</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-item">
+                <span class="stat-number">80%</span>
+                <div class="stat-label">High Protein<br>Low Carb Meals</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <div class="stat-label">Taste &<br>Enjoyment</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">Daily</span>
+                <div class="stat-label">Dark Leafy<br>Greens</div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
